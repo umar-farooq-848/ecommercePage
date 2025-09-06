@@ -1,0 +1,332 @@
+/* ========================================
+   CLIENT/SRC/STYLES/GLOBAL.CSS - Global Styles
+   ======================================== */
+
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   
+   /* CSS Variables for Gen-Z Theme */
+   :root {
+     --bg: hsl(0 0% 100%);
+     --card-bg: #F9F9F9;
+     --fg: hsl(222.2 84% 4.9%);
+     --primary: hsl(222.2 47.4% 11.2%);
+     --primary-foreground: hsl(210 40% 98%);
+     --accent-light: hsl(210 40% 96.1%);
+     --accent-dark: hsl(217.2 32.6% 17.5%);
+     --neon-green: #00FFA3;
+     --electric-indigo: #6C5DD3;
+     --neon-pink: #FF006E;
+     --cyber-yellow: #FFBE0B;
+     --soft-black: #1C1C1E;
+     --white-smoke: #F9F9F9;
+     --glass-bg: rgba(255,255,255,0.06);
+     --glass-blur: 8px;
+   }
+   
+   /* Dark theme overrides */
+   [data-theme="dark"] {
+     --bg: hsl(222.2 84% 4.9%);
+     --card-bg: hsl(217.2 32.6% 9.5%);
+     --fg: hsl(210 40% 98%);
+     --accent: var(--accent-dark);
+     --sidebar-bg: #1C1C1E;
+     --glass-bg: rgba(28,28,30,0.8);
+   }
+   
+   /* Base styles */
+   * {
+     box-sizing: border-box;
+   }
+   
+   body {
+     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+     line-height: 1.6;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+   }
+   
+   /* Custom component classes */
+   .text-gradient-neon {
+     background: linear-gradient(90deg, var(--neon-green) 0%, var(--electric-indigo) 50%, var(--neon-pink) 100%);
+     -webkit-background-clip: text;
+     background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-size: 200% 100%;
+     animation: gradient-flow 3s ease-in-out infinite;
+   }
+   
+   @keyframes gradient-flow {
+     0%, 100% {
+       background-position: 0% 50%;
+     }
+     50% {
+       background-position: 100% 50%;
+     }
+   }
+   
+   .glow-neon {
+     box-shadow: 0 6px 24px rgba(0, 255, 163, 0.18);
+   }
+   
+   .glow-indigo {
+     box-shadow: 0 8px 28px rgba(108, 93, 211, 0.18);
+   }
+   
+   .bg-neon-gradient {
+     background: linear-gradient(90deg, #00FFA3 0%, #6C5DD3 50%, #FF006E 100%);
+   }
+   
+   /* Glassmorphism effect */
+   .glass-card {
+     background: var(--glass-bg);
+     backdrop-filter: blur(var(--glass-blur));
+     border: 1px solid rgba(255, 255, 255, 0.1);
+   }
+   
+   /* Animation utilities */
+   .animate-slide-in {
+     animation: slideIn 0.3s ease-out;
+   }
+   
+   @keyframes slideIn {
+     from {
+       transform: translateY(-10px);
+       opacity: 0;
+     }
+     to {
+       transform: translateY(0);
+       opacity: 1;
+     }
+   }
+   
+   /* Focus styles for accessibility */
+   .focus-ring:focus {
+     outline: 2px solid var(--electric-indigo);
+     outline-offset: 2px;
+   }
+   
+   /* Skeleton loader */
+   .skeleton {
+     background: linear-gradient(90deg, 
+       rgba(255,255,255,0) 0%, 
+       rgba(255,255,255,0.2) 50%, 
+       rgba(255,255,255,0) 100%);
+     background-size: 200px 100%;
+     animation: loading 1.5s infinite;
+   }
+   
+   @keyframes loading {
+     0% {
+       background-position: -200px 0;
+     }
+     100% {
+       background-position: calc(200px + 100%) 0;
+     }
+   }
+   
+   /* Scrollbar styling */
+   ::-webkit-scrollbar {
+     width: 8px;
+   }
+   
+   ::-webkit-scrollbar-track {
+     background: var(--card-bg);
+   }
+   
+   ::-webkit-scrollbar-thumb {
+     background: var(--electric-indigo);
+     border-radius: 4px;
+   }
+   
+   ::-webkit-scrollbar-thumb:hover {
+     background: var(--neon-green);
+   }
+   
+   /* Custom button styles */
+   .btn-primary {
+     @apply rounded-2xl px-5 py-2 font-semibold transition-all duration-200;
+     background: linear-gradient(90deg, var(--neon-green), var(--electric-indigo));
+     color: var(--primary-foreground);
+     box-shadow: 0 6px 18px rgba(108, 93, 211, 0.12);
+   }
+   
+   .btn-primary:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 8px 24px rgba(108, 93, 211, 0.2);
+   }
+   
+   .btn-ghost {
+     @apply bg-transparent text-current hover:bg-opacity-10 rounded-2xl px-5 py-2 font-semibold transition-all duration-200;
+   }
+   
+   .btn-outline {
+     @apply border-2 border-current text-current hover:bg-current hover:text-white rounded-2xl px-5 py-2 font-semibold transition-all duration-200;
+   }
+   
+   /* Form input styles */
+   .input-field {
+     @apply w-full px-4 py-3 rounded-xl border border-opacity-20 focus:border-opacity-100 focus:outline-none transition-colors duration-200;
+     background: var(--card-bg);
+     border-color: var(--electric-indigo);
+     color: var(--fg);
+   }
+   
+   .input-field:focus {
+     border-color: var(--electric-indigo);
+     box-shadow: 0 0 0 3px rgba(108, 93, 211, 0.1);
+   }
+   
+   /* Card styles */
+   .card {
+     background: var(--card-bg);
+     backdrop-filter: blur(var(--glass-blur));
+     border: 1px solid rgba(108, 93, 211, 0.1);
+     @apply rounded-2xl p-6 transition-all duration-300;
+   }
+   
+   .card-hover {
+     @apply hover:shadow-glow-indigo hover:border-electric-indigo/30;
+   }
+   
+   /* Navbar styles */
+   .navbar {
+     background: var(--card-bg);
+     backdrop-filter: blur(12px);
+     border-bottom: 1px solid var(--glass-bg);
+   }
+   
+   /* Footer styles */
+   .footer-link {
+     @apply text-gray-600 hover:text-electric-indigo transition-colors duration-200;
+   }
+   
+   /* Loading states */
+   .loading-spinner {
+     @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin;
+   }
+   
+   /* Mobile responsive adjustments */
+   @media (max-width: 768px) {
+     .text-gradient-neon {
+       font-size: 2rem;
+     }
+     
+     .card {
+       @apply p-4;
+     }
+   }
+   
+   /* Utility classes for consistent spacing */
+   .container {
+     @apply max-w-7xl mx-auto;
+   }
+   
+   .section-padding {
+     @apply py-16 px-4;
+   }
+   
+   /* Product grid responsive */
+   .product-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+     gap: 1.5rem;
+   }
+   
+   @media (max-width: 640px) {
+     .product-grid {
+       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+       gap: 1rem;
+     }
+   }
+   
+   /* Badge styles */
+   .badge {
+     @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+   }
+   
+   .badge-success {
+     background: var(--neon-green);
+     color: var(--soft-black);
+   }
+   
+   .badge-warning {
+     background: var(--cyber-yellow);
+     color: var(--soft-black);
+   }
+   
+   .badge-danger {
+     background: var(--neon-pink);
+     color: white;
+   }
+   
+   .badge-info {
+     background: var(--electric-indigo);
+     color: white;
+   }
+   
+   /* Toast animations */
+   .toast-enter {
+     transform: translateX(100%);
+     opacity: 0;
+   }
+   
+   .toast-enter-active {
+     transform: translateX(0);
+     opacity: 1;
+     transition: all 300ms ease-in-out;
+   }
+   
+   .toast-exit {
+     transform: translateX(0);
+     opacity: 1;
+   }
+   
+   .toast-exit-active {
+     transform: translateX(100%);
+     opacity: 0;
+     transition: all 300ms ease-in-out;
+   }
+   
+   /* Accessibility improvements */
+   .sr-only {
+     position: absolute;
+     width: 1px;
+     height: 1px;
+     padding: 0;
+     margin: -1px;
+     overflow: hidden;
+     clip: rect(0, 0, 0, 0);
+     white-space: nowrap;
+     border: 0;
+   }
+   
+   /* High contrast mode support */
+   @media (prefers-contrast: high) {
+     .text-gradient-neon {
+       background: none;
+       -webkit-text-fill-color: initial;
+       color: var(--electric-indigo);
+     }
+     
+     .card {
+       border-width: 2px;
+     }
+   }
+   
+   /* Reduced motion support */
+   @media (prefers-reduced-motion: reduce) {
+     .text-gradient-neon {
+       animation: none;
+     }
+     
+     .animate-slide-in {
+       animation: none;
+     }
+     
+     * {
+       transition: none !important;
+       animation: none !important;
+     }
+   }

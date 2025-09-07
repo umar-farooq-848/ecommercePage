@@ -7,10 +7,29 @@ const router = express.Router()
 
 const { supabase } = require('../config/database')
 const { itemQueryValidation } = require('../middleware/validation')
+const { sampleProducts } = require('../../scripts/seed')
 
 // GET /api/items - List items with filters
 router.get('/', itemQueryValidation, async (req, res) => {
   try {
+    if (process.env.MOCK_DATA === 'true') {
+      const page = parseInt(req.query.page || 1)
+      const limit = parseInt(req.query.limit || 24)
+      const offset = (page - 1) * limit
+
+      const total = sampleProducts.length
+      const items = sampleProducts.slice(offset, offset + limit)
+
+      return res.json({
+        items,
+        meta: {
+          total,
+          page,
+          limit,
+          totalPages: Math.max(1, Math.ceil(total / limit))
+        }
+      })
+    }
     const {
       q = '',
       category = '',

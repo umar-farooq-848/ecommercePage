@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Button from '../components/button.jsx'
 import Card from '../components/card.jsx'
 import { useAuth } from '../context/authcontext.jsx'
+import { useEffect } from 'react'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -16,6 +17,15 @@ const Login = () => {
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const token = params.get('accessToken')
+    if (token) {
+      localStorage.setItem('accessToken', token)
+      navigate('/')
+    }
+  }, [navigate])
 
   const handleChange = (e) => {
     setFormData({
@@ -97,6 +107,16 @@ const Login = () => {
         </form>
 
         <div className="mt-6 text-center">
+          <a
+            href="/api/auth/google"
+            className="inline-flex items-center justify-center w-full px-4 py-3 border border-electric-indigo/20 rounded-xl hover:border-electric-indigo transition"
+          >
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5 mr-2" />
+            Continue with Google
+          </a>
+        </div>
+
+        <div className="mt-4 text-center">
           <p className="text-gray-600">
             Don't have an account?{' '}
             <Link to="/auth/signup" className="text-electric-indigo hover:underline font-medium">

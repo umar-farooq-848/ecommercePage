@@ -30,11 +30,25 @@ const loginValidation = [
 
 // Item validation rules
 const itemQueryValidation = [
-  query('page').optional().isInt({ min: 1 }).withMessage('Page must be a positive integer'),
-  query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limit must be 1-100'),
-  query('minPrice').optional().isFloat({ min: 0 }).withMessage('Min price must be non-negative'),
-  query('maxPrice').optional().isFloat({ min: 0 }).withMessage('Max price must be non-negative'),
-  query('sort').optional().isIn(['newest', 'price_asc', 'price_desc', 'popularity']).withMessage('Invalid sort option'),
+  query('page')
+    .optional({ checkFalsy: true, nullable: true })
+    .isInt({ min: 1 }).withMessage('Page must be a positive integer')
+    .toInt(),
+  query('limit')
+    .optional({ checkFalsy: true, nullable: true })
+    .isInt({ min: 1, max: 100 }).withMessage('Limit must be 1-100')
+    .toInt(),
+  query('minPrice')
+    .optional({ checkFalsy: true, nullable: true })
+    .isFloat({ min: 0 }).withMessage('Min price must be non-negative')
+    .toFloat(),
+  query('maxPrice')
+    .optional({ checkFalsy: true, nullable: true })
+    .isFloat({ min: 0 }).withMessage('Max price must be non-negative')
+    .toFloat(),
+  query('sort')
+    .optional({ checkFalsy: true, nullable: true })
+    .isIn(['newest', 'price_asc', 'price_desc', 'popularity']).withMessage('Invalid sort option'),
   handleValidationErrors
 ]
 

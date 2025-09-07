@@ -142,6 +142,8 @@ const sampleProducts = [
   }
 ]
 
+module.exports.sampleProducts = sampleProducts
+
 const seedDatabase = async () => {
   try {
     console.log('🌱 Starting database seeding...')
@@ -151,7 +153,7 @@ const seedDatabase = async () => {
     const adminUser = {
       id: uuidv4(),
       name: 'Admin User',
-      email: 'admin@genshop.com',
+      email: 'admin@buybuddy.com',
       password_hash: adminPassword,
       is_verified: true,
       created_at: new Date().toISOString()
@@ -188,7 +190,7 @@ const seedDatabase = async () => {
 
     console.log('🎉 Database seeding completed!')
     console.log('\nTest Credentials:')
-    console.log('Email: admin@genshop.com')
+    console.log('Email: admin@buybuddy.com')
     console.log('Password: admin123')
 
   } catch (error) {
@@ -202,4 +204,4 @@ if (require.main === module) {
   seedDatabase()
 }
 
-module.exports = { seedDatabase }
+module.exports = { seedDatabase, sampleProducts }

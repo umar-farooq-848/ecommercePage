@@ -7,6 +7,8 @@ const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
+const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 // Explicitly load .env file from the server directory
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
@@ -36,6 +38,7 @@ app.use(helmet({
 
 app.use(compression())
 app.use(cookieParser())
+app.use(passport.initialize())
 
 // CORS configuration
 const corsOptions = {

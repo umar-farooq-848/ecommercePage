@@ -59,7 +59,7 @@ const Signup = () => {
     <div className="min-h-screen flex items-center justify-center px-4">
       <Card className="w-full max-w-md" glow>
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gradient-neon mb-2">Join GenShop</h1>
+          <h1 className="text-3xl font-bold text-gradient-neon mb-2">Join BuyBuddy</h1>
           <p className="text-gray-600">Create your account</p>
         </div>
 

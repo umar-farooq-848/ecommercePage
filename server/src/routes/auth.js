@@ -10,6 +10,8 @@ const router = express.Router()
 const { supabase } = require('../config/database')
 const { auth } = require('../middleware/auth')
 const { signupValidation, loginValidation } = require('../middleware/validation')
+const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 // Generate tokens
 const generateTokens = (userId) => {
@@ -26,6 +28,95 @@ const generateTokens = (userId) => {
   )
   
   return { accessToken, refreshToken }
+}
+
+// Google OAuth strategy
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL || 'http://localhost:5000/api/auth/google/callback'
+  }, async (accessToken, refreshToken, profile, done) => {
+    try {
+      const email = profile.emails?.[0]?.value
+      const name = profile.displayName || 'Google User'
+      const googleId = profile.id
+
+      if (!email) {
+        return done(null, false)
+      }
+
+      // Find user by email
+      const { data: existingUser } = await supabase
+        .from('users')
+        .select('id, email')
+        .eq('email', email)
+        .single()
+
+      let userId
+      if (existingUser) {
+        userId = existingUser.id
+      } else {
+        // Create new user
+        const { data: newUser, error } = await supabase
+          .from('users')
+          .insert({
+            id: uuidv4(),
+            name,
+            email,
+            password_hash: '',
+            is_verified: true
+          })
+          .select('id')
+          .single()
+
+        if (error) return done(error)
+        userId = newUser.id
+      }
+
+      return done(null, { id: userId })
+    } catch (err) {
+      return done(err)
+    }
+  }))
+
+  router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+
+  router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: '/auth/login' }), async (req, res) => {
+    try {
+      const userId = req.user.id
+      const { accessToken, refreshToken } = generateTokens(userId)
+
+      const refreshTokenHash = await bcrypt.hash(refreshToken, 10)
+      await supabase
+        .from('refresh_tokens')
+        .insert({
+          id: uuidv4(),
+          user_id: userId,
+          token_hash: refreshTokenHash,
+          expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+        })
+
+      res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000
+      })
+
+      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'
+      const redirectUrl = `${frontendUrl}/auth/login?accessToken=${encodeURIComponent(accessToken)}`
+      return res.redirect(redirectUrl)
+    } catch (error) {
+      console.error('Google callback error:', error)
+      return res.redirect('/auth/login')
+    }
+  })
+} else {
+  // Provide helpful error if Google env is missing
+  router.get('/google', (req, res) => {
+    res.status(500).json({ error: 'Google OAuth not configured. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in server/.env' })
+  })
 }
 
 // POST /api/auth/signup

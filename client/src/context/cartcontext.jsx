@@ -3,7 +3,7 @@
 // ========================================
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import * as api from '../utils/api'
-import { useAuth } from './AuthContext'
+import { useAuth } from './authcontext.jsx'
 
 const CartContext = createContext()
 

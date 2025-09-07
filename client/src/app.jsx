@@ -3,17 +3,17 @@
 // ========================================
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import Toast from './components/Toast'
-import Landing from './pages/Landing'
-import ProductDetail from './pages/ProductDetail'
-import Cart from './pages/Cart'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import Account from './pages/Account'
-import NotFound from './pages/NotFound'
-import { useTheme } from './context/ThemeContext'
+import Navbar from './components/navbar.jsx'
+import Footer from './components/footer.jsx'
+import Toast from './components/toast.jsx'
+import Landing from './pages/landing.jsx'
+import ProductDetail from './pages/productdetail.jsx'
+import Cart from './pages/cart.jsx'
+import Login from './pages/login.jsx'
+import Signup from './pages/signup.jsx'
+import Account from './pages/account.jsx'
+import NotFound from './pages/notfound.jsx'
+import { useTheme } from './context/themecontext.jsx'
 
 function App() {
   const { theme } = useTheme()

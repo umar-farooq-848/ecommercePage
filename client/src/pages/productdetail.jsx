@@ -3,10 +3,10 @@
 // ========================================
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import Button from '../components/Button'
-import Badge from '../components/Badge'
-import ProductCard from '../components/ProductCard'
-import { useCart } from '../context/CartContext'
+import Button from '../components/button.jsx'
+import Badge from '../components/badge.jsx'
+import ProductCard from '../components/productcard.jsx'
+import { useCart } from '../context/cartcontext.jsx'
 import * as api from '../utils/api'
 
 const ProductDetail = () => {

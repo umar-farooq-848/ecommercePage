@@ -3,9 +3,9 @@
 // ========================================
 import React, { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import ProductCard from '../components/ProductCard'
-import FilterPanel from '../components/FilterPanel'
-import Button from '../components/Button'
+import ProductCard from '../components/productcard.jsx'
+import FilterPanel from '../components/filterpanel.jsx'
+import Button from '../components/button.jsx'
 import * as api from '../utils/api'
 
 const Landing = () => {

@@ -4,9 +4,9 @@
 // ========================================
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Button from './Button'
-import Badge from './Badge'
-import { useCart } from '../context/CartContext'
+import Button from './button.jsx'
+import Badge from './badge.jsx'
+import { useCart } from '../context/cartcontext.jsx'
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart()

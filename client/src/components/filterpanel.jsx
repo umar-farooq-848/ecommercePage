@@ -2,7 +2,7 @@
 // CLIENT/SRC/COMPONENTS/FILTERPANEL.JSX
 // ========================================
 import React, { useState } from 'react'
-import Button from './Button'
+import Button from './button.jsx'
 
 const FilterPanel = ({ filters, onFilterChange }) => {
   const [isOpen, setIsOpen] = useState(false)

@@ -3,7 +3,7 @@
 // ========================================
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Button from '../components/Button'
+import Button from '../components/button.jsx'
 
 const NotFound = () => {
   return (

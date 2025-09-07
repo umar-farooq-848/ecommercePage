@@ -3,9 +3,9 @@
 // ========================================
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Button from '../components/Button'
-import { useCart } from '../context/CartContext'
-import { useAuth } from '../context/AuthContext'
+import Button from '../components/button.jsx'
+import { useCart } from '../context/cartcontext.jsx'
+import { useAuth } from '../context/authcontext.jsx'
 
 const Cart = () => {
   const { cart, updateCartItem, removeFromCart, loading } = useCart()

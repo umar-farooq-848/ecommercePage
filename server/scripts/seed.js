@@ -8,7 +8,7 @@ require('dotenv').config()
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_KEY
 )
 
 const sampleProducts = [
@@ -25,21 +25,20 @@ const sampleProducts = [
     ],
     stock: 25,
     rating: 4.8,
-    reviewCount: 156,
+    review_count: 156,
     specs: {
       'Battery Life': '30 hours',
       'Connectivity': 'Bluetooth 5.0',
       'Weight': '250g',
       'Warranty': '2 years'
-    },
-    isNew: true
+    }
   },
   {
     id: uuidv4(),
     title: 'Smart Fitness Tracker',
     description: 'Advanced fitness tracker with heart rate monitoring, GPS, and 7-day battery life.',
     price: 149.99,
-    originalPrice: 199.99,
+    original_price: 199.99,
     category: 'Electronics',
     tags: ['fitness', 'tracker', 'smartwatch', 'health'],
     images: [
@@ -48,14 +47,13 @@ const sampleProducts = [
     ],
     stock: 18,
     rating: 4.6,
-    reviewCount: 89,
+    review_count: 89,
     specs: {
       'Battery Life': '7 days',
       'Water Resistance': 'IP68',
       'Display': '1.4" AMOLED',
       'Sensors': 'Heart rate, GPS, Accelerometer'
-    },
-    salePrice: true
+    }
   },
   {
     id: uuidv4(),
@@ -70,7 +68,7 @@ const sampleProducts = [
     ],
     stock: 42,
     rating: 4.7,
-    reviewCount: 203,
+    review_count: 203,
     specs: {
       'Capacity': '25L',
       'Material': 'Water-resistant nylon',
@@ -91,21 +89,20 @@ const sampleProducts = [
     ],
     stock: 12,
     rating: 4.9,
-    reviewCount: 67,
+    review_count: 67,
     specs: {
       'Capacity': '12 cups',
       'Grinder': 'Built-in burr grinder',
       'Carafe': 'Thermal stainless steel',
       'Programming': '24-hour programmable'
-    },
-    isNew: true
+    }
   },
   {
     id: uuidv4(),
     title: 'Ergonomic Office Chair',
     description: 'High-back ergonomic office chair with lumbar support and adjustable armrests for all-day comfort.',
     price: 399.99,
-    originalPrice: 499.99,
+    original_price: 499.99,
     category: 'Home & Garden',
     tags: ['office', 'chair', 'ergonomic', 'furniture'],
     images: [
@@ -114,14 +111,13 @@ const sampleProducts = [
     ],
     stock: 8,
     rating: 4.5,
-    reviewCount: 124,
+    review_count: 124,
     specs: {
       'Height Adjustment': '43-53cm',
       'Weight Capacity': '150kg',
       'Material': 'Breathable mesh',
       'Warranty': '5 years'
-    },
-    salePrice: true
+    }
   },
   {
     id: uuidv4(),
@@ -136,7 +132,7 @@ const sampleProducts = [
     ],
     stock: 35,
     rating: 4.8,
-    reviewCount: 91,
+    review_count: 91,
     specs: {
       'Pages': '200 blank pages',
       'Size': '21x14cm',

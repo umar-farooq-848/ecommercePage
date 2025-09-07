@@ -7,7 +7,10 @@ const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
-require('dotenv').config()
+// Explicitly load .env file from the server directory
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
 
 const authRoutes = require('./routes/auth')
 const itemRoutes = require('./routes/items')

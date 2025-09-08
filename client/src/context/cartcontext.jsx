@@ -23,6 +23,8 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     if (isAuthenticated) {
       fetchCart()
+    } else {
+      clearCart()
     }
   }, [isAuthenticated])
 

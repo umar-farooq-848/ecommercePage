@@ -16,15 +16,14 @@ export const useTheme = () => {
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme')
+      const saved = localStorage.getItem('app-theme')
       if (saved) return saved
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
     return 'light'
   })
 
   useEffect(() => {
-    localStorage.setItem('theme', theme)
+    localStorage.setItem('app-theme', theme)
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 

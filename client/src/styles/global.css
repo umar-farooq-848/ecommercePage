@@ -207,16 +207,6 @@
      @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin;
    }
    
-   /* Mobile responsive adjustments */
-   @media (max-width: 768px) {
-     .text-gradient-neon {
-       font-size: 2rem;
-     }
-     
-     .card {
-       @apply p-4;
-     }
-   }
    
    /* Utility classes for consistent spacing */
    .container {
@@ -234,12 +224,6 @@
      gap: 1.5rem;
    }
    
-   @media (max-width: 640px) {
-     .product-grid {
-       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-       gap: 1rem;
-     }
-   }
    
    /* Badge styles */
    .badge {
@@ -330,3 +314,40 @@
        animation: none !important;
      }
    }
+
+/* Mobile responsive adjustments */
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-gradient-neon {
+    font-size: 2rem;
+  }
+
+  .card {
+    @apply p-4;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

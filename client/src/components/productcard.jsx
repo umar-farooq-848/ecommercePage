@@ -3,18 +3,27 @@
 // CLIENT/SRC/COMPONENTS/PRODUCTCARD.JSX
 // ========================================
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from './button.jsx'
 import Badge from './badge.jsx'
 import { useCart } from '../context/cartcontext.jsx'
+import { useAuth } from '../context/authcontext.jsx'
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart()
+  const { user } = useAuth()
+  const navigate = useNavigate()
   const [loading, setLoading] = React.useState(false)
 
   const handleAddToCart = async (e) => {
     e.preventDefault()
     e.stopPropagation()
+
+    if (!user) {
+      navigate('/auth/login')
+      return
+    }
+
     setLoading(true)
     
     const result = await addToCart(product.id, 1)
@@ -25,8 +34,8 @@ const ProductCard = ({ product }) => {
   }
 
   return (
-    <Link to={`/product/${product.id}`} className="group">
-      <div className="bg-[var(--card-bg)] rounded-2xl p-4 hover:shadow-glow-indigo transition-all duration-300 border border-electric-indigo/10 group-hover:border-electric-indigo/30">
+    <Link to={`/product/${product.id}`} className="group h-full">
+      <div className="bg-[var(--card-bg)] rounded-2xl p-4 hover:shadow-glow-indigo transition-all duration-300 border border-electric-indigo/10 group-hover:border-electric-indigo/30 flex flex-col h-full">
         {/* Image */}
         <div className="relative aspect-square mb-4 rounded-xl overflow-hidden bg-gray-100">
           <img
@@ -47,8 +56,8 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Content */}
-        <div className="space-y-2">
-          <h3 className="font-semibold text-[var(--fg)] group-hover:text-electric-indigo transition-colors">
+        <div className="space-y-2 flex flex-col flex-grow">
+          <h3 className="font-semibold text-[var(--fg)] group-hover:text-electric-indigo transition-colors truncate">
             {product.title}
           </h3>
           
@@ -73,7 +82,7 @@ const ProductCard = ({ product }) => {
 
           <Button
             onClick={handleAddToCart}
-            className="w-full mt-3"
+            className="w-full mt-auto pt-3"
             disabled={loading}
           >
             {loading ? '...' : 'Add to Cart'}

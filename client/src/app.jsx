@@ -19,10 +19,10 @@ function App() {
   const { theme } = useTheme()
 
   return (
-    <div className={`min-h-screen ${theme}`} data-theme={theme}>
-      <div className="bg-[var(--bg)] text-[var(--fg)] transition-colors duration-300">
+    <div className={`min-h-screen flex flex-col ${theme}`} data-theme={theme}>
+      <div className="bg-[var(--bg)] text-[var(--fg)] transition-colors duration-300 flex flex-col flex-grow">
         <Navbar />
-        <main className="min-h-screen pt-16">
+        <main className="flex-grow pt-16">
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/product/:id" element={<ProductDetail />} />

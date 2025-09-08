@@ -62,21 +62,23 @@ const Cart = () => {
           {cart.items.map((item) => (
             <div
               key={item.itemId}
-              className="bg-[var(--card-bg)] rounded-2xl p-6 border border-electric-indigo/10"
+              className="bg-[var(--card-bg)] rounded-2xl p-4 sm:p-6 border border-electric-indigo/10"
             >
-              <div className="flex items-center space-x-4">
-                <img
-                  src={item.image || '/placeholder-product.jpg'}
-                  alt={item.name}
-                  className="w-20 h-20 rounded-lg object-cover"
-                />
-                
-                <div className="flex-1">
-                  <h3 className="font-semibold text-[var(--fg)]">{item.name}</h3>
-                  <p className="text-electric-indigo font-bold">${item.price}</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center mb-4 sm:mb-0">
+                  <img
+                    src={item.image || '/placeholder-product.jpg'}
+                    alt={item.name}
+                    className="w-20 h-20 rounded-lg object-cover"
+                  />
+                  
+                  <div className="ml-4">
+                    <h3 className="font-semibold text-[var(--fg)]">{item.name}</h3>
+                    <p className="text-electric-indigo font-bold">${item.price}</p>
+                  </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-end space-x-4">
                   {/* Quantity Controls */}
                   <div className="flex items-center border border-gray-300 rounded-lg">
                     <button

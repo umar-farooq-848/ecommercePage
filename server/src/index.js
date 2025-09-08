@@ -25,6 +25,7 @@ const PORT = process.env.PORT || 5000
 
 // Security middleware
 app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }, // Allow cross-origin requests
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],

@@ -7,12 +7,14 @@ import Button from '../components/button.jsx'
 import Badge from '../components/badge.jsx'
 import ProductCard from '../components/productcard.jsx'
 import { useCart } from '../context/cartcontext.jsx'
+import { useAuth } from '../context/authcontext.jsx'
 import * as api from '../utils/api'
 
 const ProductDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { addToCart } = useCart()
+  const { isAuthenticated } = useAuth()
   const [product, setProduct] = useState(null)
   const [relatedProducts, setRelatedProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -50,6 +52,10 @@ const ProductDetail = () => {
   }
 
   const handleAddToCart = async () => {
+    if (!isAuthenticated) {
+      navigate('/signup');
+      return;
+    }
     setAddingToCart(true)
     const result = await addToCart(product.id, quantity)
     if (result.success) {
@@ -133,11 +139,11 @@ const ProductDetail = () => {
             <div className="flex items-center space-x-4 mb-4">
               <div className="flex items-center space-x-2">
                 <span className="text-2xl font-bold text-electric-indigo">
-                  ${product.price}
+                  ₹{product.price}
                 </span>
                 {product.originalPrice && (
                   <span className="text-lg line-through text-gray-500">
-                    ${product.originalPrice}
+                    ₹{product.originalPrice}
                   </span>
                 )}
               </div>

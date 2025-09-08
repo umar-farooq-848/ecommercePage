@@ -32,6 +32,10 @@ const Landing = () => {
     fetchProducts({ ...filters, ...urlParams })
   }, [searchParams])
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [products])
+
   const fetchProducts = async (currentFilters = filters, currentPage = 1) => {
     setLoading(true)
     try {
@@ -71,7 +75,6 @@ const Landing = () => {
   const handlePageChange = (page) => {
     setPagination(prev => ({ ...prev, page }))
     fetchProducts(filters, page)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
